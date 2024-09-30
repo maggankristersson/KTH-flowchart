@@ -1,6 +1,7 @@
 import requests
 import json
 import regex as re
+import sys
 
 BASE_URL = "https://api.kth.se/api/kopps/v2/course"
 
@@ -43,8 +44,14 @@ def parse_prerequisites(prerequisites):
 
 
 def main():
+    if len(sys.argv) < 2:
+        print("Usage: python main.py {course_code}")
+        sys.exit(1)
+
+    # Take argument and assign as course code
+    course_code = sys.argv[1]
+
     # Fetch course information and save to json file
-    course_code = "DD1351"
     fetch_course(course_code)
 
     # Read course information from json file
